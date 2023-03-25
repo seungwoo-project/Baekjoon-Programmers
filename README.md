@@ -1,2 +1,2 @@
 # algorithm
-This is a auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+<h1> 목표 : 하루에 1개씩 </h1>
