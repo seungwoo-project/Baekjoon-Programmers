@@ -1,2 +1,2 @@
 # algorithm
-<strong> 목표 : 하루에 1개씩 </strong>
+<h3> 목표 : 하루에 1개씩 </h3>
