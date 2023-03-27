@@ -1,0 +1,11 @@
+while(1):
+    a,b=map(int,input().split())
+    if(a==b):
+        break
+    else:
+        if(a%b==a):
+            print('factor')
+        elif(a%b==0):
+            print('multiple')
+        else:
+            print('neither')
