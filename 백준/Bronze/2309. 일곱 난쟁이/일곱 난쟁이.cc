@@ -1,25 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
-int a[9] , sum =0;
-pair<int,int> ret;
-
+int a[9];
+void solve() {
+	int sum=0;
+	for(int i = 0 ; i < 7 ; i++) {
+		sum += a[i];
+	}
+	
+	if (sum == 100) {
+		for(int i = 0 ; i < 7 ; i++) {
+			cout << a[i] << '\n';
+		}
+		exit(0);
+	}
+	return ;
+}
 int main() {
 	for(int i = 0 ; i < 9 ; i++) {
 		cin >> a[i];
-		sum += a[i];
 	}
 	sort(a,a+9);
-	for(int i = 0 ; i < 9 ; i++) {
-		for(int j = i+1 ; j < 9 ; j++) {
-			if(sum-a[i]-a[j]==100) {
-				ret = {i,j};
-			}
-		}
-	}
-	
-	for(int i = 0 ; i < 9 ; i++) {
-		if(ret.first == i || ret.second == i) continue;
-		cout << a[i] << '\n';
-	}
+	do{
+		solve();
+	} while(next_permutation(a,a+9));
 	return 0;
 }
