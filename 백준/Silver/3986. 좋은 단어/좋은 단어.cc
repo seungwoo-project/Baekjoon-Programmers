@@ -1,12 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
-stack<char> stk;
 string s;
 int cnt;
 int n;
 int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cin.tie(NULL);
 	cin >> n;
 	for(int i = 0 ; i < n ; i++) {
+		stack<char> stk;
 		cin >> s;
 		for(char c : s) {
 			if(stk.empty()) {
@@ -22,12 +25,8 @@ int main() {
 		
 		if(stk.empty()) {
 			cnt++; 
-		} else {
-			while(stk.size()) {
-				stk.pop();
-			}
-			}
-		}
+		} 
+	}
 	
 	cout << cnt;
 	return 0;
