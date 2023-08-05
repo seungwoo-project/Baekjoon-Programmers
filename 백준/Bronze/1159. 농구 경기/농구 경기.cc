@@ -1,31 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
+string s; // 선수의 성
+int a[30]; 
 int n;
-string s;
-int cnt[30];
-vector<char> v;
-
+int cnt;
 int main() {
-	cin >> n;
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
+	cin >> n; // 선수의 수
+	// 선수의 성 작성하기
 	for(int i = 0 ; i < n ; i++) {
-		cin >> s; // 선수의 이름을 입력받기  
-		cnt[s[0]-'a']++; // 성만 추출해서 카운트
-		} 
-	
-	
-	for(int i = 0 ; i< 30 ; i++) {
-		if(cnt[i] >= 5) { // 성이 5개 이상이면 푸쉬  
-			v.push_back(char(i+'a'));
+		cin >> s;
+		a[s[0]-97]++;
+	}
+	for(int i = 0 ; i < 26 ; i++) {
+		if(a[i]>=5) {
+			cout << char(i+97);
+			cnt++;
 		}
 	}
-	
-	if(v.size()==0) {
-		cout << "PREDAJA";
-	} else {
-		sort(v.begin(),v.end()); // 사전순으로  
-		for(char i : v) cout << i;
-	}
-
+	if(cnt==0) cout << "PREDAJA";
 	return 0;
 }
-
