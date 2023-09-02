@@ -1,9 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n;
-int a[68][68], visited[68][68];
-const int dy[] = {-1,0,1,0} , dx[] = {0,1,0,-1};
-int y,x;
+int a[68][68];
 
 void go(int sx, int sy, int ex, int ey) {
 	for(int i = sx ; i < ex ; i++) {
