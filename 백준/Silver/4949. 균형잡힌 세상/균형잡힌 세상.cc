@@ -1,48 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
-string s;
+
 int main() {
-	while(getline(cin,s)) {
-		if(s == ".") exit(0);
-		int flag = 0;
-		stack<char> stk;
-		stack<int> b_stk;	
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	while(true) {
+		string s;
+		getline(cin, s);
+		if(s == ".") break;
+		stack<int> stk;
+		bool check = true;
 		for(char c : s) {
-			
-			if(c == '(') {
-				stk.push(c);
-				b_stk.push(2); 
-			} else if (c == '[') {
-				stk.push(c);
-				b_stk.push(3);
-			} 
-			if(stk.size() == 0 && (c == ')' || c == ']')) {
-				flag = 1;
-				break;
-			} 
-				if(c == ')' && b_stk.top() == 2) {
-				stk.pop();
-				b_stk.pop();
-				} else if(c == ')' && b_stk.top() == 3) {
-					flag = 1;
-				}
-				
-				if (c == ']' && b_stk.top() == 3) {
+			if(c == ')') {
+				if(stk.size() == 0 || stk.top() == '[') {
+					check = false;
+					break;
+				} else {
 					stk.pop();
-					b_stk.pop();
-				} else if (c == ']' && b_stk.top() == 2){
-					flag = 1;
 				}
+			}
 			
+			if(c == ']') {
+				if(stk.size() == 0 || stk.top() == '(') {
+					check = false;
+					break;
+				} else {
+					stk.pop();
+				}
+			}
+			if(c == '(') stk.push(c);
+			else if (c == '[') stk.push(c);
 		}
-			
-	
-		if(stk.size() == 0 && flag == 0) {
-			cout << "yes" << '\n';
-		} else if (stk.size() || flag){
-			cout << "no" << '\n';
-		}
-		
+		if(stk.size() == 0 && check) cout << "yes\n";
+		else cout << "no\n";
 	}
 	return 0;
 }
