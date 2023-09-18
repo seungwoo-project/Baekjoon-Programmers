@@ -38,6 +38,6 @@ int main() {
 	}
 
 	int ret = postorder(root);
-	cout << ret << '\n';
+	cout << ret;
 	return 0;
 }
