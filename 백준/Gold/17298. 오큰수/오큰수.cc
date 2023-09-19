@@ -1,3 +1,4 @@
+//최적화 
 #include <bits/stdc++.h>
 using namespace std;
 int n;
@@ -8,22 +9,11 @@ int main() {
 	cin >> n;
 	for(int i = 0 ; i < n ; i++) {
 		cin >> key;
-		if(stk.size() == 0) {
-			stk.push({i,key});
-		} 
-		else {
-			if(stk.top().second >= key) {
-				stk.push({i,key});
-			} 
-			else {
-				while(stk.size() && stk.top().second < key) {
-					v.push_back({stk.top().first,key});
-					stk.pop();
-				}
-				stk.push({i,key});
-				
-			}
+		while(stk.size() && stk.top().second < key) {
+			v.push_back({stk.top().first,key});
+			stk.pop();
 		}
+		stk.push({i,key});
 	}
 	while(stk.size()) {
 		v.push_back({stk.top().first,-1});
