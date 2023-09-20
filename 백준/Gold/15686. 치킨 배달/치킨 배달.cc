@@ -1,9 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n,m;
-int a[54][54], visited[54][54];
-const int dy[] = {-1,0,1,0};
-const int dx[] = {0,1,0,-1};
+int a[54][54];
 vector<pair<int,int>> house;
 vector<pair<int,int>> ck;
 vector<int> v;
