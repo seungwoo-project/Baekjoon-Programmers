@@ -1,25 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n;
-string p, q;
+string key, m, s, e, a;
 int pos;
-string st, en, sten;
+vector<string> ret;
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
 	cin >> n;
-	cin >> p;
-	
-	pos = p.find('*');
-	st= p.substr(0,pos);
-	en= p.substr(pos+1);
-	sten=st+en;
+	cin >> key;
+	pos = key.find("*");
+	s=key.substr(0,pos);
+	e=key.substr(pos+1,key.length());
+	a=s+e;
 	for(int i = 0 ; i < n ; i++) {
-		cin >> q;
-		if(sten.size() <= q.size() && q.substr(0,st.size())==st && q.substr(q.size()-en.size())==en) {
-			cout << "DA" << '\n';
-		} else cout << "NE" << '\n';
+		cin >> m;
+		if((m.length()>=a.length()) && (s==m.substr(0,s.length())) && (e==m.substr(m.length()-e.length(),m.length()))) ret.push_back("DA");
+		else ret.push_back("NE");
 	}
+	
+	for(string i : ret) cout << i << '\n';
 	return 0;
 }
