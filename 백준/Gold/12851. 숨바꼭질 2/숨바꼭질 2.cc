@@ -1,34 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, m;
-const int MAX = 200000; 
-int visited[MAX+4];
-queue<int> q; 
-long long cnt[MAX+4];
+int a , k, b, visited[200004], cnt[200004];
+queue<int> q;
 int main() {
-	cin >> n >> m;
-	if(n == m){
-        puts("0"); puts("1");
-        return 0; 
-    } 
-	visited[n] = 1;
-	cnt[n] = 1;
-	q.push(n);
+	cin >> a >> b;
+	
+	visited[a] = 1;	
+	cnt[a] = 1;
+	q.push(a);
 	while(q.size()) {
-		int a = q.front(); q.pop();
-		for(int next : {a-1,a+1,a*2}) {
-			if (0 <= next && next <= MAX) { 
-                if (!visited[next]) {
-                    q.push(next); 
-                    visited[next] = visited[a] + 1;
-                    cnt[next] += cnt[a];
-                } else if (visited[next] == visited[a] + 1) {
-                    cnt[next] += cnt[a];
-                }
+		k = q.front(); q.pop();
+		for(int tmp : {k+1, k-1, k*2}) {
+			if(tmp < 0 || tmp > 200000) continue;
+			if(visited[tmp] == visited[k] + 1) { // 만약 이미 방문되어 있던 곳을 또 방문한다면 
+				cnt[tmp] = cnt[tmp] + cnt[k];
 			}
+			if(visited[tmp]) continue; // 만약 방문되어 있다면 패스
+			 visited[tmp] = visited[k] + 1;
+			 cnt[tmp] = cnt[tmp] + cnt[k]; 
+			 q.push(tmp);
 		}
 	}
-	cout << visited[m] - 1 << '\n';
-	cout << cnt[m];
+	
+	cout << visited[b] - 1 << '\n';
+	cout << cnt[b];
 	return 0;
 }
