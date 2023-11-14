@@ -13,19 +13,18 @@ using namespace std;
 10월 31일
 11월 30일
 12월 31일
-5월 121일 지나고 24일 더 지나면 145일 
 */
-map<int,int> mp;
-map<int,string> ret;
-int a,b;
+
+int a,b,c,sum;
 string solution(int a, int b) {
     string answer = "";
-    mp[1] = 31, mp[2] = 60, mp[3] = 91, mp[4] = 121, mp[5] = 152, mp[6] = 182, mp[7] = 213, mp[8] = 244;
-    mp[9] = 274, mp[10] = 305, mp[11] = 335, mp[12] = 366;
-    ret[0] = "FRI", ret[1] = "SAT", ret[2] = "SUN", ret[3] = "MON", ret[4] = "TUE", ret[5] = "WED";
-    ret[6] = "THU";
+    int day[] = {31,29,31,30,31,30,31,31,30,31,30,31};
+    string ret[] = {"SUN", "MON" , "TUE", "WED", "THU", "FRI", "SAT"};
     cin >> a >> b;
-    int c =(mp[a-1] + b - 1) % 7;
+    for(int i = 0 ; i < a - 1 ; i++) {
+        sum += day[i];
+    }
+    c = ((sum + b + 4) % 7);
     answer = ret[c];
     return answer;
 }
