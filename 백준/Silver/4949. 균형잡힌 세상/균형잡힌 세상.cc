@@ -1,39 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+string s;
 int main() {
 	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
+	cin.tie(0);
+	
 	while(true) {
-		string s;
+		stack<char> stk;
+		int flag = 0;
 		getline(cin, s);
-		if(s == ".") break;
-		stack<int> stk;
-		bool check = true;
+		if(s == ".") return 0;
+		
 		for(char c : s) {
-			if(c == ')') {
-				if(stk.size() == 0 || stk.top() == '[') {
-					check = false;
+			if(c == '(' || c == '[') {
+				stk.push(c);
+			} else if(c == ')') {
+				if(!stk.empty() && stk.top() == '(') stk.pop();
+				else {
+					flag = 1;
 					break;
-				} else {
-					stk.pop();
+				}
+			} else if(c == ']') {
+				if(!stk.empty() && stk.top() == '[') stk.pop();
+				else {
+					flag = 1;
+					break;
 				}
 			}
-			
-			if(c == ']') {
-				if(stk.size() == 0 || stk.top() == '(') {
-					check = false;
-					break;
-				} else {
-					stk.pop();
-				}
-			}
-			if(c == '(') stk.push(c);
-			else if (c == '[') stk.push(c);
+		
+		
 		}
-		if(stk.size() == 0 && check) cout << "yes\n";
-		else cout << "no\n";
+		if(!stk.empty() || flag) cout << "no\n";
+		else cout << "yes\n";
 	}
 	return 0;
 }
