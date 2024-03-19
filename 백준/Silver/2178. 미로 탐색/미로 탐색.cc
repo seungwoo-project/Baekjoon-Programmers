@@ -2,7 +2,6 @@
 using namespace std;
 int n, m, board[104][104], visited[104][104], y, x;
 int dx[4] = {0,1,0,-1}, dy[4] = {-1,0,1,0};
-int ny, nx;
 string s;
 int main() {
 	ios_base::sync_with_stdio(false);
