@@ -1,36 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-const int dx[] = {0,1,0,-1}, dy[] = {-1,0,1,0};
-int a[104][104], visited[104][104];
-int n , m , ny , nx, y, x;
+int n, m, board[104][104], visited[104][104], y, x;
+int dx[4] = {0,1,0,-1}, dy[4] = {-1,0,1,0};
+int ny, nx;
 string s;
-queue<pair<int,int>> q;
 int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+	
 	cin >> n >> m;
-	for(int i = 1 ; i <= n ; i++) {
+	for(int i = 0 ; i < n ; i++) {
 		cin >> s;
-		for(int k = 1 ; k <= s.size() ; k++) {
-			a[i][k] = s[k-1]-48;
+		for(int j = 0 ; j < m ; j++) {
+			board[i][j] = s[j] - '0';
 		}
 	}
-	// 너비우선탐색 최단거리 bfs queue
-	visited[1][1] = 1;
-	q.push({1,1}); 
-	while(q.size()){
-	    tie(y,x) = q.front(); q.pop();
+	queue<pair<int,int>> q;
+	q.push({0,0});
+	visited[0][0] = 1;
+	while(q.size()) {
+		tie(y,x) = q.front(); q.pop();
 		for(int i = 0 ; i < 4 ; i++) {
-		ny = y + dy[i];
-		nx = x + dx[i];
-		if(ny < 1 || ny > n || nx < 1 || nx > m) continue;
-		if(a[ny][nx] == 0) continue;
-		if(visited[ny][nx]) continue;
-		visited[ny][nx] = visited[y][x] + 1;
-		q.push({ny,nx});
+			int ny = y + dy[i];
+			int nx = x + dx[i];
+			if(ny < 0 || ny >= n || nx < 0 || nx >= m) continue;
+			if(visited[ny][nx] || !board[ny][nx]) continue;
+			visited[ny][nx] = visited[y][x] + 1;
+			q.push({ny,nx});
 		}
 	}
-	
-	
-	cout << visited[n][m];
+	cout << visited[n-1][m-1];
 	return 0;
 }
