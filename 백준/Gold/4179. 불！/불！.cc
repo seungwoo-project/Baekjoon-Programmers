@@ -1,68 +1,58 @@
 #include <bits/stdc++.h>
 using namespace std;
+int y,x;
 char a[1004][1004];
-int j_visited[1004][1004];
-queue<pair<int,int>> jq , fq;
-const int dy[] = {-1,0,1,0} , dx[] = {0,1,0,-1};
-vector<int> ret;
-int n,m;
-void f_bfs(int y, int x) {
-	for(int i = 0 ; i < 4 ; i++) {
-		int ny = y + dy[i];
-		int nx = x + dx[i];
-		if(ny < 0 || ny >= n || nx < 0 || nx >= m) continue;
-		if(a[ny][nx] == '#') continue;
-		if(a[ny][nx] == 'F') continue;
-		a[ny][nx] = 'F';
-		fq.push({ny,nx});
-	}
-}
-
-void j_bfs(int y ,int x) {
-	for(int i = 0 ; i < 4 ; i++) {
-		int ny = y + dy[i];
-		int nx = x + dx[i];
-		if(ny < 0 || ny >= n || nx < 0 || nx >= m) {
-			ret.push_back(j_visited[y][x]);
-			continue;
-		}
-		if(j_visited[ny][nx]) continue;
-		if(a[ny][nx] != '.') continue;
-		j_visited[ny][nx] = j_visited[y][x] + 1;
-		jq.push({ny,nx});
-	}
-}
+int F_visited[1004][1004], J_visited[1004][1004];
+queue<pair<int,int>> Fq;
+queue<pair<int,int>> Jq;
+int dx[4] = {0,1,0,-1}, dy[4] = {-1,0,1,0};
 int main() {
-	cin >> n >> m;
-	for(int i = 0 ; i < n ; i++) {
-		for(int j = 0 ; j < m ; j++) {
+	int r,c;
+	cin >> r >> c;
+	for(int i = 0 ; i < r ; i++) {
+		for(int j = 0 ; j < c ; j++) {
 			cin >> a[i][j];
 			if(a[i][j] == 'J') {
-				jq.push({i,j});
-				j_visited[i][j] = 1;
-			}
-			if(a[i][j] == 'F') {
-				fq.push({i,j});
+				Jq.push({i,j});
+				J_visited[i][j] = 1;
+			} else if(a[i][j] == 'F') {
+				Fq.push({i,j});
+				F_visited[i][j] = 1;
 			}
 		}
 	}
 	
-	while(1) {
-		int k = fq.size();
-		for(int i = 0 ; i < k ; i++){
-			f_bfs(fq.front().first, fq.front().second);
-			fq.pop();
+	while(Fq.size()) {
+		tie(y,x) = Fq.front();
+		Fq.pop();
+		for(int i = 0 ; i < 4 ; i++) {
+			int ny = y + dy[i];
+			int nx = x + dx[i];
+			if(ny < 0 || ny >= r || nx < 0 || nx >= c) continue;
+			if(F_visited[ny][nx] || a[ny][nx] == '#') continue;
+			F_visited[ny][nx] = F_visited[y][x] + 1;
+			Fq.push({ny,nx});
 		}
-		
-		int l = jq.size();
-		for(int i = 0 ; i < l ; i++){
-			j_bfs(jq.front().first, jq.front().second);
-			jq.pop();
-		}
-		
-		if(jq.size() == 0) break;
 	}
-	if(ret.size()) cout << *min_element(ret.begin(),ret.end());
-	else cout << "IMPOSSIBLE";
+	
+	while(Jq.size()) {
+		tie(y,x) = Jq.front();
+		Jq.pop();
+		for(int i = 0 ; i < 4 ; i++) {
+			int ny = y + dy[i];
+			int nx = x + dx[i];
+			if(ny < 0 || ny >= r || nx < 0 || nx >= c) { // 범위에 벗어나면 탈출 
+				cout << J_visited[y][x];
+				return 0; 
+			}
+			if(J_visited[ny][nx] || a[ny][nx] == '#') continue;
+			if(F_visited[ny][nx] != 0 && J_visited[y][x] + 1 >= F_visited[ny][nx]) continue;
+			J_visited[ny][nx] = J_visited[y][x] + 1;
+			
+			Jq.push({ny,nx});
+		}
+	}
+	
+	cout << "IMPOSSIBLE";
 	return 0;
 }
