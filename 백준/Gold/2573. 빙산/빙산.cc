@@ -82,13 +82,10 @@ int main() {
         //         }
         //         cout << '\n';
         //     }
+        if(cnt >= 2) break;
         if(cnt == 0) {
             cout << 0;
             return 0;
-        } else if(cnt == 1) {
-            continue;
-        } else {
-            break;
         }
     }
     
