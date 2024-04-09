@@ -59,19 +59,19 @@ int main() {
         
         cnt = 0;
         ans++;
-        //빙산 녹인 후의 그래프
-        for(int i = 0 ; i < n ; i++) {
-            for(int j = 0 ; j < m ; j++) {
-                if(a[i][j] - melting[i][j] < 0) a[i][j] = 0;
-                else a[i][j] -= melting[i][j];
-            }
-        }
         for(int i = 0; i < n; i++) fill(visited[i], visited[i] + m, 0);
         for(int i = 0 ; i < n ; i++) {
             for(int j = 0 ; j < m ; j++) {
                 if(visited[i][j] || a[i][j] == 0) continue; //방문했다면 패스
                 cnt++;
                 bfs(i,j);
+            }
+        }
+        //빙산 녹인 후의 그래프
+        for(int i = 0 ; i < n ; i++) {
+            for(int j = 0 ; j < m ; j++) {
+                if(a[i][j] - melting[i][j] < 0) a[i][j] = 0;
+                else a[i][j] -= melting[i][j];
             }
         }
         // cout << "-------------------------\n";
