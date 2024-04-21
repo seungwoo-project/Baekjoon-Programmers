@@ -4,22 +4,21 @@ using namespace std;
 int n;
 string name;
 int age;
-vector<tuple<int,string,int>> v;
-bool cmp(tuple<int,string,int> a , tuple<int,string,int> b) {
-    if(get<0>(a) == get<0>(b)) return get<2>(a) < get<2>(b);
-    else return get<0>(a) < get<0>(b);
+vector<pair<int,string>> v;
+bool cmp(pair<int,string> a , pair<int,string> b) {
+    return a.first < b.first;
 }
 int main()
 {
     cin >> n;
     for(int i = 0 ; i < n ; i++) {
         cin >> age >> name;
-        v.push_back({age,name,i});
+        v.push_back({age,name});
     }
-    sort(v.begin(),v.end(),cmp);
+    stable_sort(v.begin(),v.end(),cmp); // 상대값 유지 한 채 정렬
     
     for(auto it : v) {
-        cout << get<0>(it) << " " << get<1>(it) << '\n';
+        cout << it.first  << " " << it.second << '\n';
     }
     return 0;
 }
