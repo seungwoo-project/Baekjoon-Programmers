@@ -1,24 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
-long long a, b, c;
-
-long long go(long long a, long long b) {
-	if(b==1) return a*b%c;
-	
-	long long ret = go(a,b/2);
-	ret = ret * ret % c;
-	if(b%2) ret = ret * a % c;
-	return ret;
+long long a,b,c;
+long long fn(long long b) {
+    if(b == 1) return a*b%c;
+    else if(b%2==0) {
+        return fn(b/2) * fn(b/2) % c;
+    } else {
+        return fn(b/2) * fn(b/2+1) % c;
+    }
 }
-
-
-
-int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	
-	cin >> a >> b >> c;
-	cout << go(a,b);
-	return 0;
+int main()
+{
+    cin >> a >> b >> c;
+    cout << fn(b);
+    return 0;
 }
