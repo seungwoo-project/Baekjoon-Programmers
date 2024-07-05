@@ -18,7 +18,7 @@ int main() {
     ll min_left;
     ll min_right;
     ll min_mid;
-    ll ans = 4000000004;
+    ll ans = 3000000004;
     for(int i = 0 ; i < v.size(); i++) {
         for(int j = i + 1 ; j < v.size(); j++) {
             ll tmp = - v[i] - v[j];
