@@ -9,7 +9,7 @@ int solution(string t, string p) {
     
     for(int i = 0 ; i < t.size() - p.size() + 1; i++) {
         string s = t.substr(i, p.size());
-        if(stoll(s) <= stoll(p)) answer++;
+        if(s <= p) answer++;
     }
     return answer;
 }
